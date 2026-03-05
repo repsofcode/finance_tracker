@@ -1,0 +1,12 @@
+body {
+  background-color: purple;
+   ;
+}
+.heading_1{
+    color: olivedrab;
+}
+.form-group{
+    flex: none;
+    flex-direction: column;
+
+}
