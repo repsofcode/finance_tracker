@@ -1,4 +1,4 @@
-// backend/middleware/auth.js
+
 const { verifyAccessToken } = require('../utils/jwt');
 
 const authMiddleware = (req, res, next) => {
