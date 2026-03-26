@@ -1,4 +1,4 @@
-// src/context/AuthContext.jsx
+
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading]         = useState(false);
   const navigate                      = useNavigate();
 
-  // Keep localStorage in sync whenever accessToken state changes
+  
   useEffect(() => {
     if (accessToken) {
       localStorage.setItem('accessToken', accessToken);
@@ -52,7 +52,7 @@ export function AuthProvider({ children }) {
     try {
       await api.post('/auth/logout');
     } catch (_) {
-      // even if logout API fails, clear local state
+      
     } finally {
       setUser(null);
       setAccessToken(null);
@@ -67,7 +67,7 @@ export function AuthProvider({ children }) {
   );
 }
 
-// Custom hook — use this in every page instead of useContext(AuthContext) directly
+
 export function useAuth() {
   return useContext(AuthContext);
 }
