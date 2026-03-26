@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const ACCESS_SECRET = 'short-lived-tokens-122333';   // ← should be much longer & random in real app
+const ACCESS_SECRET = 'short-lived-tokens-122333';   
 const REFRESH_SECRET = 'long-lived-tokens-444455555';
 
 function createAccessToken(payload) {
@@ -36,7 +36,7 @@ function verifyRefreshToken(token) {
 }
 
 module.exports = {
-  createAccessToken,        // ← fixed typo here
+  createAccessToken,       
   createRefreshToken,
   verifyAccessToken,
   verifyRefreshToken,
