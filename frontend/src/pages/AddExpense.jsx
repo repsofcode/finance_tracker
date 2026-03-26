@@ -1,4 +1,4 @@
-// src/pages/AddExpense.jsx
+
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../api';
@@ -121,7 +121,6 @@ function AddExpense() {
   );
 }
 
-// ── Style helpers ─────────────────────────────────────────────────────────────
 const fieldStyle = { marginBottom: '1.2rem' };
 
 const labelStyle = { display: 'block', marginBottom: '5px', fontSize: '14px' };
