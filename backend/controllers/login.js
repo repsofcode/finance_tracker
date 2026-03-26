@@ -1,9 +1,9 @@
-// In your backend/controllers/authController.js (same file as register)
+
 
 const User = require('../models/User');
 const { createAccessToken, createRefreshToken } = require('../utils/jwt');
 
-// ... your existing register export here ...
+
 
 exports.login = async (req, res) => {
   try {
