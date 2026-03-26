@@ -1,4 +1,4 @@
-// backend/models/User.js
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    minlength: 2,           // fixed typo: minlength, not mainlength
+    minlength: 2,           
   },
   email: {
     type: String,
@@ -15,13 +15,13 @@ const userSchema = new mongoose.Schema({
     unique: true,
     lowercase: true,
     trim: true,
-    match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email address'], // basic email format check
+    match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email address'], 
   },
   password: {
     type: String,
     required: true,
-    minlength: 8,           // fixed typo
-    select: false,          // never return password in find/query results
+    minlength: 8,         
+    select: false,         
   },
   monthlyBudget: {
     type: Number,
@@ -35,20 +35,20 @@ const userSchema = new mongoose.Schema({
   ],
 }, { timestamps: true });
 
-// IMPORTANT: Hash password AUTOMATICALLY only when it's changed
+
 userSchema.pre('save', async function (next) {
-  // Step 1: Skip if password wasn't modified (e.g. only name/email changed)
+ 
   if (!this.isModified('password')) {
-    return next(); // continue saving without touching password
+    return next();
   }
 
-  // Step 2: Only now do the expensive hashing
+  
   try {
-    const salt = await bcrypt.genSalt(12);                  // random salt per user
-    this.password = await bcrypt.hash(this.password, salt); // one-way hash
-    next();                                                 // save the document
+    const salt = await bcrypt.genSalt(12);                  
+    this.password = await bcrypt.hash(this.password, salt); 
+    next();                                                 
   } catch (err) {
-    next(err); // if bcrypt fails (very rare), pass error to Mongoose
+    next(err); 
   }
 });
 
