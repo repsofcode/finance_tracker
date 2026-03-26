@@ -4,9 +4,7 @@ const mongoose = require('mongoose');
 
 exports.getSummary = async (req, res) => {
   try {
-    const { month } = req.query; // optional ?month=2026-03
-
-    // Determine month & year (default: current month)
+    const { month } = req.query; 
     let year, mon;
     if (month) {
       [year, mon] = month.split('-').map(Number);
@@ -16,18 +14,18 @@ exports.getSummary = async (req, res) => {
     } else {
       const now = new Date();
       year = now.getFullYear();
-      mon = now.getMonth() + 1; // JS months are 0-based
+      mon = now.getMonth() + 1; 
     }
 
-    // Date range for the month
+    
     const startOfMonth = new Date(year, mon - 1, 1);
     const endOfMonth = new Date(year, mon, 0, 23, 59, 59, 999);
 
-    // 1. Get user's current monthly budget
+    
     const user = await User.findById(req.user.id).select('monthlyBudget name email');
     const budget = user?.monthlyBudget || 0;
 
-    // 2. Aggregate total expenses for the user in this month
+    
     const aggResult = await Expense.aggregate([
       {
         $match: {
@@ -45,7 +43,7 @@ exports.getSummary = async (req, res) => {
 
     const totalExpenses = aggResult.length > 0 ? aggResult[0].totalExpenses : 0;
 
-    // 3. Calculate remaining & financial status
+    
     const remaining = budget - totalExpenses;
 
     let status;
@@ -59,10 +57,10 @@ exports.getSummary = async (req, res) => {
       status = 'Overspending';
     }
 
-    // 4. Format month string (YYYY-MM)
+
     const monthStr = `${year}-${String(mon).padStart(2, '0')}`;
 
-    // 5. Response
+
     res.status(200).json({
       month: monthStr,
       budget,
