@@ -15,7 +15,7 @@ function EditExpense() {
   const [fetching, setFetching]       = useState(true);
   const [error, setError]             = useState('');
 
-  // Load existing expense data on mount
+ 
   useEffect(() => {
     const fetchExpense = async () => {
       try {
@@ -24,7 +24,7 @@ function EditExpense() {
         setAmount(e.amount);
         setCategory(e.category);
         setDescription(e.description || '');
-        // Format date to YYYY-MM-DD for the date input
+        
         setDate(new Date(e.date).toISOString().split('T')[0]);
       } catch (err) {
         setError('Failed to load expense. It may have been deleted.');
@@ -42,7 +42,7 @@ function EditExpense() {
 
     try {
       await api.put(`/expenses/${id}`, {
-        amount:      parseFloat(amount), // backend expects a number, not a string
+        amount:      parseFloat(amount), 
         category:    category.trim(),
         description: description.trim(),
         date,
@@ -56,7 +56,7 @@ function EditExpense() {
     }
   };
 
-  // Loading state while fetching expense
+  
   if (fetching) {
     return (
       <div style={{ textAlign: 'center', padding: '4rem', color: '#888' }}>
@@ -65,7 +65,7 @@ function EditExpense() {
     );
   }
 
-  // Error state if expense not found
+  
   if (error) {
     return (
       <div style={{ textAlign: 'center', padding: '4rem' }}>
@@ -159,7 +159,7 @@ function EditExpense() {
   );
 }
 
-// ── Style helpers ─────────────────────────────────────────────────────────────
+
 const fieldStyle = { marginBottom: '1.2rem' };
 
 const labelStyle = { display: 'block', marginBottom: '5px', fontSize: '14px' };
