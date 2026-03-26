@@ -1,4 +1,4 @@
-// src/pages/Expenses.jsx
+
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -42,7 +42,7 @@ function Expenses() {
     if (!window.confirm('Delete this expense?')) return;
     try {
       await api.delete(`/expenses/${id}`);
-      fetchExpenses(); // refresh list after delete
+      fetchExpenses();
     } catch (err) {
       alert('Failed to delete expense. Please try again.');
     }
@@ -174,7 +174,6 @@ function Expenses() {
   );
 }
 
-// ── Style helpers ─────────────────────────────────────────────────────────────
 const cardStyle = {
   padding: '1.2rem',
   border: '1px solid #e0e0e0',
