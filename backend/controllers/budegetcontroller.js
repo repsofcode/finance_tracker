@@ -1,11 +1,10 @@
-// Example: in authController.js or userController.js
 const User = require('../models/User');
 
 exports.updateBudget = async (req, res) => {
   try {
     const { budget } = req.body;
 
-    // Validation
+ 
     if (budget === undefined || typeof budget !== 'number') {
       return res.status(400).json({ error: 'Budget must be a number' });
     }
@@ -14,7 +13,7 @@ exports.updateBudget = async (req, res) => {
       return res.status(400).json({ error: 'Budget cannot be negative' });
     }
 
-    // Update logged-in user's monthly budget
+ 
     const user = await User.findByIdAndUpdate(
       req.user.id,
       { monthlyBudget: budget },
@@ -28,7 +27,7 @@ exports.updateBudget = async (req, res) => {
     res.status(200).json({
       message: 'Monthly budget updated successfully',
       budget: user.monthlyBudget,
-      // optional: return more info
+ 
       user: {
         id: user._id,
         name: user.name,
